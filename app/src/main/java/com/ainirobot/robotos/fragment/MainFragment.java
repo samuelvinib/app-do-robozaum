@@ -29,6 +29,7 @@ public class MainFragment extends BaseFragment {
     private Button mLead_scene;
     private Button mSport_scene;
     private Button mSpeech_scene;
+    private Button mVideo_scene;
     private Button mVision_scene;
     private Button mCharge_scene;
     private Button mLocation_scene;
@@ -47,6 +48,7 @@ public class MainFragment extends BaseFragment {
 
     private void bindViews(View root) {
         mLead_scene = (Button) root.findViewById(R.id.lead_scene);
+        mVideo_scene = (Button) root.findViewById(R.id.video_scene);
         mSport_scene = (Button) root.findViewById(R.id.sport_scene);
         mSpeech_scene = (Button) root.findViewById(R.id.speech_scene);
         mVision_scene = (Button) root.findViewById(R.id.vision_scene);
@@ -71,6 +73,14 @@ public class MainFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 switchFragment(LeadFragment.newInstance());
+            }
+        });
+
+        mVideo_scene.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                switchFragment(ScreenSaver.newInstance("android.resource://" + requireActivity().getPackageName() + "/" + R.raw.background));
             }
         });
 

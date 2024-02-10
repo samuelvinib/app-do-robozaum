@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">Robot App Sample</string>
+    <string name="app_name">Teste robozão</string>
     <string name="sdk_info">SDK Sample</string>
     <string name="basic_scene">Basic scene</string>
     <string name="navigation">Navigation</string>
@@ -8,6 +8,7 @@
     <string name="visual_ability">Visual ability</string>
     <string name="speech_ability">Speech ability</string>
     <string name="audio_ability">audio ability</string>
+    <string name="video_screen">video test</string>
     <string name="exit">Exit</string>
 
     <string name="start_lead_text">Start navigation</string>
@@ -43,7 +44,7 @@
     <string name="vision_warning">Warning:Due to legal restrictions, the registration API is not developed in regions other than China. You may need Google or MS related services to implement the face registration function </string>
     <string name="vision_warning2">No api to delete person at the moment</string>
     <string name="charge_desc">If you want to \"Leaving Charge Dock\", you have to \"disable auto-charge\" before robot start charge</string>
-    <string name="connect_failed">Your sdk init failed<br/><br/> Make sure launch this app from Home Launcher!<br/><br/> 你的SDK初始化失败了<br/>请确保从应用中心启动此程序。</string>
+    <string name="connect_failed">Your sdk init failed<br /><br /> Make sure launch this app from Home Launcher!<br /><br /> 你的SDK初始化失败了<br />请确保从应用中心启动此程序。</string>
 
     <string name="location_reception">Is in reception point?</string>
     <string name="location_init_point">Init Position</string>
@@ -77,8 +78,7 @@
     <string name="cancel_txt">Cancel</string>
     <string name="confirm_txt">Confirm</string>
     <string name="forbid_line_explain">\"No-go line has been added\" or \"No need to add\". Please tap \"Save\".</string>
-
-
+    <string name="meu_texto_simples">Meu texto simples</string>
 
 
 </resources>
