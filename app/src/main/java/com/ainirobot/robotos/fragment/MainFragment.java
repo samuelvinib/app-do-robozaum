@@ -18,25 +18,26 @@ package com.ainirobot.robotos.fragment;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.Button;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.List;
+import android.os.Handler;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
+import com.ainirobot.coreservice.client.listener.Person;
+import com.ainirobot.coreservice.client.person.PersonApi;
+import com.ainirobot.coreservice.client.person.PersonListener;
 import com.ainirobot.robotos.R;
+import com.ainirobot.robotos.maputils.FaceDetectionUtils;
+
+
+import org.w3c.dom.Text;
 
 public class MainFragment extends BaseFragment {
+    private static Timer timer;
 
-    private Button mLead_scene;
-    private Button mSport_scene;
-    private Button mSpeech_scene;
-    private Button mVideo_scene;
-    private Button mVision_scene;
-    private Button mCharge_scene;
-    private Button mLocation_scene;
-    private Button mNavigation_scene;
-    private Button mAudio_scene;
-    private Button mExit;
-    private Button mXBack;
     @Override
     public View onCreateView(Context context) {
         View root = mInflater.inflate(R.layout.fragment_main_layout,null,false);
@@ -47,92 +48,20 @@ public class MainFragment extends BaseFragment {
     }
 
     private void bindViews(View root) {
-        mLead_scene = (Button) root.findViewById(R.id.lead_scene);
-        mVideo_scene = (Button) root.findViewById(R.id.video_scene);
-        mSport_scene = (Button) root.findViewById(R.id.sport_scene);
-        mSpeech_scene = (Button) root.findViewById(R.id.speech_scene);
-        mVision_scene = (Button) root.findViewById(R.id.vision_scene);
-        mCharge_scene = (Button) root.findViewById(R.id.charge_scene);
-        mLocation_scene = (Button) root.findViewById(R.id.location_scene);
-        mNavigation_scene = (Button) root.findViewById(R.id.navigation_scene);
-        mAudio_scene = (Button) root.findViewById(R.id.audio_scene);
-        mExit = (Button) root.findViewById(R.id.exit);
+        TextView mDynamicText = root.findViewById(R.id.dynamicTextView);
 
-
-
-        mExit.setOnClickListener(new View.OnClickListener() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View v) {
-                if (getActivity() != null) {
-                    getActivity().onBackPressed();
-                    getActivity().finish();
-                }
-            }
-        });
-        mLead_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFragment(LeadFragment.newInstance());
-            }
-        });
+            public void run() {
 
-        mVideo_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                switchFragment(ScreenSaver.newInstance("android.resource://" + requireActivity().getPackageName() + "/" + R.raw.background));
+                mDynamicText.setText("Aguarde...");
             }
-        });
+        }, 2000);
 
-        mSpeech_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFragment(SpeechFragment.newInstance());
-            }
-        });
+        mActivity.switchFragment(ScreenSaver.newInstance());
 
-        mSport_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFragment(SportFragment.newInstance());
-            }
-        });
 
-        mVision_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFragment(VisionFragment.newInstance());
-            }
-        });
-
-        mLocation_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFragment(LocationFragment.newInstance());
-            }
-        });
-
-        mNavigation_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            switchFragment(NavigationFragment.newInstance());
-//                switchFragment(NavFragment.newInstance());
-            }
-        });
-
-        mCharge_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFragment(ChargeFragment.newInstance());
-            }
-        });
-
-        mAudio_scene.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switchFragment(AudioFragment.newInstance());
-            }
-        });
     }
 
     public static Fragment newInstance() {

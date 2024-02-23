@@ -15,26 +15,21 @@ import com.ainirobot.robotos.R;
 
 public class ScreenSaver extends Fragment {
     protected MainActivity mActivity;
-    private static final String ARG_VIDEO_URL = "video_url";
     private String mVideoUrl;
 
     public ScreenSaver() {
         // Required empty public constructor
     }
 
-    public static ScreenSaver newInstance(String videoUrl) {
-        ScreenSaver fragment = new ScreenSaver();
-        Bundle args = new Bundle();
-        args.putString(ARG_VIDEO_URL, videoUrl);
-        fragment.setArguments(args);
-        return fragment;
+    public static ScreenSaver newInstance() {
+        return new ScreenSaver();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mVideoUrl = getArguments().getString(ARG_VIDEO_URL);
+            mVideoUrl = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.background;
         }
     }
 
