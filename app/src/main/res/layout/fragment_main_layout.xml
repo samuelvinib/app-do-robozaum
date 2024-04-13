@@ -10,7 +10,7 @@
             android:id="@+id/dynamicTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bem vindo!"
+            android:text="@string/hello_blank_fragment"
             android:textSize="55sp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
