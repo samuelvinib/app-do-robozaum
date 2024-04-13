@@ -2,41 +2,21 @@ package com.ainirobot.robotos.fragment;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.VideoView;
 
 import androidx.fragment.app.Fragment;
 
-import com.ainirobot.robotos.MainActivity;
 import com.ainirobot.robotos.R;
 
-public class ScreenSaver extends Fragment {
-    protected MainActivity mActivity;
-    private String mVideoUrl;
-
-    public ScreenSaver() {
-        // Required empty public constructor
-    }
-
-    public static ScreenSaver newInstance() {
-        return new ScreenSaver();
-    }
+public class ScreenSaver extends BaseFragment {
+    protected String mVideoUrl;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mVideoUrl = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.background;
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_screen_saver, container, false);
-        VideoView videoView = view.findViewById(R.id.video_view);
+    public View onCreateView(Context context) {
+        mVideoUrl = "android.resource://" + requireActivity().getPackageName() + "/" + R.raw.background;
+        View root = mInflater.inflate(R.layout.fragment_screen_saver,null,false);
+        VideoView videoView = root.findViewById(R.id.video_view);
 
         if (mVideoUrl != null) {
             videoView.setVideoPath(mVideoUrl);
@@ -53,23 +33,33 @@ public class ScreenSaver extends Fragment {
             @Override
             public void onClick(View v) {
                 try {
-                    mActivity.switchFragment(MainFragment.newInstance());
+                   switchFragment(MainFragment.newInstance());
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
-        return view;
+        bindViews(root);
+        hideBackView();
+        hideResultView();
+        return root;
+    };
+
+    private void bindViews(View root) {
+        VideoView mVideoView = root.findViewById(R.id.video_view);
+        mVideoView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                switchFragment(MainFragment.newInstance());
+            }
+        });
+
+
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof MainActivity) {
-            mActivity = (MainActivity) context;
-        } else {
-            throw new RuntimeException(context.toString() + " must implement MainActivity");
-        }
+
+    public static Fragment newInstance() {
+        return new ScreenSaver();
     }
 }
