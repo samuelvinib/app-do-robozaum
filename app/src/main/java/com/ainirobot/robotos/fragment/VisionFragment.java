@@ -37,7 +37,6 @@ import com.ainirobot.coreservice.client.person.PersonUtils;
 import com.ainirobot.coreservice.client.robotsetting.RobotSettingApi;
 import com.ainirobot.robotos.LogTools;
 import com.ainirobot.robotos.R;
-import com.ainirobot.robotos.maputils.TimerManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -99,15 +98,6 @@ public class VisionFragment extends BaseFragment {
             LogTools.info("Found faces,count:"+allFaceList.size());
             //get best person face to register
             //找到人脸最佳的进行识别
-
-            if (allFaceList.isEmpty()) {
-                TimerManager.getInstance(mActivity).noFaceDetected();
-                Log.i("Face", "noFaceDetected");
-            } else {
-                TimerManager.getInstance(mActivity).faceDetected();
-                Log.i("Face", "faceDetected");
-            }
-
             final Person person = PersonUtils.getBestFace(allFaceList);
             if(person == null){
                 LogTools.info("No good face found | 没有找到符合要求的人脸图片");

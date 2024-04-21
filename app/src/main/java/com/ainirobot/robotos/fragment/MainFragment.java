@@ -1,6 +1,7 @@
 package com.ainirobot.robotos.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.RemoteException;
 import android.view.View;
 import android.widget.TextView;
@@ -15,6 +16,7 @@ import com.ainirobot.coreservice.client.speech.SkillApi;
 import com.ainirobot.coreservice.client.speech.SkillCallback;
 import com.ainirobot.coreservice.client.speech.entity.TTSEntity;
 import com.ainirobot.robotos.LogTools;
+import com.ainirobot.robotos.MainActivity;
 import com.ainirobot.robotos.R;
 import com.ainirobot.robotos.application.RobotOSApplication;
 import com.ainirobot.robotos.application.SpeechCallback;
@@ -34,28 +36,12 @@ public class MainFragment extends BaseFragment {
         View root = mInflater.inflate(R.layout.fragment_main_layout, null, false);
         bindViews(root);
         hideBackView();
-        TimerManager mTimerManager = TimerManager.getInstance(mActivity);
-        mTimerManager.start();
+        MainActivity activity = (MainActivity) getActivity();
+        if (activity != null) {
+            Intent serviceIntent = new Intent(activity, TimerManager.class);
+            activity.startService(serviceIntent);
+        }
         hideResultView();
-        mSkillApi = new SkillApi();
-
-        mSkillApi.connectApi(context, new ApiListener() {
-            @Override
-            public void handleApiDisabled() {
-                // Lidar com a API desativada
-            }
-
-            @Override
-            public void handleApiConnected() {
-                // Registro de callback para resposta de fala
-                mSkillApi.registerCallBack(mSkillCallback);
-            }
-
-            @Override
-            public void handleApiDisconnected() {
-                // Lidar com a desconexão do serviço de fala
-            }
-        });
 
         return root;
     }
@@ -76,41 +62,7 @@ public class MainFragment extends BaseFragment {
                 mDynamicText.setText("Tell me something");
 
                 mSkillApi.setRecognizable(true);
-
-//                mSpeechCallback.onQueryAsrResult();
-//
-//                mSkillCallback = new SkillCallback() {
-//                    @Override
-//                    public void onSpeechParResult(String text) throws RemoteException {
-//
-//                    }
-//
-//                    @Override
-//                    public void onStart() throws RemoteException {
-//
-//                    }
-//
-//                    @Override
-//                    public void onStop() throws RemoteException {
-//
-//                    }
-//
-//                    @Override
-//                    public void onVolumeChange(int volume) throws RemoteException {
-//
-//                    }
-//
-//                    @Override
-//                    public void onQueryEnded(int queryEndStatus) throws RemoteException {
-//
-//                    }
-//
-//                    @Override
-//                    public void onQueryAsrResult(String asrResult) {
-//                        mActivity.runOnUiThread(() -> mDynamicText.setText(asrResult));
-//                    }
-//
-//                };
+                
 
             } catch (Exception e) {
                 e.printStackTrace();
